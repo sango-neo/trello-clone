@@ -13,7 +13,7 @@ import cors from "cors";
 import { SocketEventsEnum } from "./types/socketEvents.enum";
 import jwt from "jsonwebtoken";
 import User from "./models/user";
-import { secret } from "./config";
+import { env } from "./config";
 
 const app = express(); //creates an instance of express //returns object that defines the app (methods and properties)
 const httpServer = createServer(app); //accepts requestListener function on instantiation 
@@ -54,7 +54,7 @@ app.get('/api/boards/:boardId/tasks', authMiddleware, tasksController.getTasks);
 io.use(async (socket: Socket, next) => { //use will take middleware to auth the user;
     try {
         const token = (socket.handshake.auth.token as string) ?? "";
-        const data = jwt.verify(token.split(" ")[1], secret) as {
+        const data = jwt.verify(token.split(" ")[1], env.secret as string) as {
             id: string;
             email: string;
         };
@@ -103,15 +103,20 @@ io.use(async (socket: Socket, next) => { //use will take middleware to auth the 
     
 });
 
-mongoose.connect("mongodb://localhost:27017/eltrello", {
-    family: 4 //ipv4? alternatively run "mongod --ipv6" 
-}).then( () => {
+mongoose.connect(env.prod_dbURI as string).then( () => {
     console.log("connected to mongodb");
     //only start the server after connection to database is established;
-    httpServer.listen(4001, () => {
-        console.log("API is listening on port 4001");
+    httpServer.listen(env.port, () => {
+        console.log(`API is listening on port ${env.port}`);
     });
 }).catch( (err) => {
     console.log('failed to connect to database: ', err)
 });
+
+// if using local machine database, pass as second argument to mongoose.connect: 
+/*
+    {
+        family: 4 //ipv4? alternatively run "mongod --ipv6" 
+    }
+*/ 
 

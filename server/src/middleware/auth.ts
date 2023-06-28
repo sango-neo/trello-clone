@@ -1,7 +1,7 @@
 import { NextFunction, Response } from "express";
 import { ExpressRequestInterface } from "../types/expressRequest.interface";
 import jwt from "jsonwebtoken";
-import { secret } from "../config";
+import { env } from "../config";
 import UserModel from "../models/user";
 
 export default async (req: ExpressRequestInterface, res: Response, next: NextFunction) => {
@@ -12,7 +12,7 @@ export default async (req: ExpressRequestInterface, res: Response, next: NextFun
             return res.sendStatus(401);
         }
         const token = authHeader.split(" ")[1];
-        const data = jwt.verify(token, secret) as {id: string; email: string;}; //we use type assertion here. we "know" the interface of the data
+        const data = jwt.verify(token, env.secret as string) as {id: string; email: string;}; //we use type assertion here. we "know" the interface of the data
         const user = await UserModel.findById(data.id);
 
         if(!user) {

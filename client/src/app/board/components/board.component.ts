@@ -78,7 +78,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     initializeListeners(): void {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationStart && !event.url.includes('/boards/')) {
-                console.log('leaving a page');
+                // console.log('leaving a page');
                 this.boardService.leaveBoard(this.boardId);
             }
         }); //no need to unsubscribe from http events; unsub handled by angular automatically. Safe approach: unsub from all subs
