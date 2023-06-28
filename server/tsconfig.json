@@ -1,0 +1,12 @@
+//setting typical configuration for node js app that uses typescript
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES6",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "strict": true
+  }
+}
