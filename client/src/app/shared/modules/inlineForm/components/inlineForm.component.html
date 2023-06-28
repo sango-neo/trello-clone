@@ -1,0 +1,36 @@
+<div
+  class="inline-form-container"
+  [ngClass]="{ 'inline-form-container-editing': isEditing }"
+  (click)="activeEditing()"
+>
+  <!-- [ngClass] directive, when passed obj as value, will add the class, whose name is denoted by a property's key, if expression in the value of that key resolves to true or remove it if it resolves to false  -->
+  <div class="inline-form-text" *ngIf="!isEditing">{{ defaultText }}</div>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    *ngIf="isEditing"
+    class="inline-form"
+  >
+    <input
+      type="text"
+      formControlName="title"
+      class="inline-form-input"
+      [placeholder]="inputPlaceholder"
+      *ngIf="inputType === 'input'"
+    />
+    <textarea
+      *ngIf="inputType === 'textarea'"
+      formControlName="title"
+      class="inline-form-input"
+    ></textarea>
+    <button
+      *ngIf="hasButton"
+      type="submit"
+      [disabled]="form.invalid"
+      class="inline-form-button"
+    >
+      {{ buttonText }}
+    </button>
+  </form>
+</div>
+<!-- formControlName="title", the element will be bound to the control named title in the form group in the Class. On submit we emit the value of the control whose name is "title" -->
