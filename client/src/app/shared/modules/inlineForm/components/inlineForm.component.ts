@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { UntypedFormBuilder, FormGroup } from "@angular/forms";
 
 @Component({
     selector: 'inline-form',
@@ -23,7 +23,7 @@ export class InlineFormComponent {
         title: [''],
     });
 
-    constructor(private fb: FormBuilder) {}
+    constructor(private fb: UntypedFormBuilder) {}
 
     activeEditing(): void {
         if(this.title) {

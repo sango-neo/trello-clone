@@ -1,5 +1,5 @@
 import { Component, HostBinding, OnDestroy } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
+import { UntypedFormBuilder } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { combineLatest, filter, map, Observable, Subject, takeUntil } from "rxjs";
 import { SocketService } from "src/app/shared/services/socket.service";
@@ -31,7 +31,7 @@ export class TaskModalComponent implements OnDestroy {
         private route: ActivatedRoute, 
         private router: Router, 
         private boardService: BoardService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private tasksService: TasksService,
         private socketService: SocketService
         ) {

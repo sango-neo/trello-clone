@@ -1,9 +1,10 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component } from "@angular/core";
-import { Validators, FormBuilder } from "@angular/forms";
+import { Validators, UntypedFormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
 import { SocketService } from "src/app/shared/services/socket.service";
 import { AuthService } from "../../services/auth.service";
+import { CurrentUserInterface } from "../../types/currentUser.interface";
 
 @Component({
     selector: 'auth-login',
@@ -19,7 +20,7 @@ export class LoginComponent {
     })
 
     constructor(
-        private fb: FormBuilder, 
+        private fb: UntypedFormBuilder, 
         private authService: AuthService, 
         private router: Router,
         private socketService: SocketService,
@@ -27,7 +28,7 @@ export class LoginComponent {
 
     onSubmit(): void {
         this.authService.login(this.form.value).subscribe({
-            next: (currentUser) => {
+            next: (currentUser: CurrentUserInterface) => {
                 //block processed if http request good
                 console.log('currentUser', currentUser);
                 this.authService.setToken(currentUser);
