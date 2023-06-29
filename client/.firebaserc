@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "trello-clone-neo": {
+      "hosting": {
+        "eltrello": [
+          "trello-clone-neo"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "trello-clone-neo"
+  }
+}
