@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -17,14 +17,13 @@ import { SocketService } from './shared/services/socket.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    
+    AppComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     AuthModule,
-    HttpClientModule,
     CommonModule,
     HomeModule, 
     BoardsModule,
@@ -37,6 +36,7 @@ import { SocketService } from './shared/services/socket.service';
       useClass: AuthInterceptor,
       multi: true,
     }, 
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
     SocketService
   ],
   bootstrap: [AppComponent]
