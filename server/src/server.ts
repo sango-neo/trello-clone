@@ -39,7 +39,7 @@ mongoose.set("toJSON", { //use .set() to configure global settings for mongoose
 }); //removing the _ in the JSON responses we get from mongodb; mongoose will still have _id (and id) though
 
 app.get("/", (req, res) => {
-    res.send("API is UP");
+    res.send(`API is runnning.`);
 });
 
 app.post('/api/users', usersController.register);
