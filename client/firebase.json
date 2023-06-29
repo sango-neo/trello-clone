@@ -2,7 +2,12 @@
   "hosting": [
     {
       "target": "eltrello",
-      "source": ".",
+      "public": "dist/eltrello",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
       "frameworksBackend": {}
     }
   ]
